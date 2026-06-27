@@ -1,0 +1,26 @@
+const int soilPin = 34;     // Potentiometer connected to GPIO34
+const int relayPin = 26;    // Relay connected to GPIO26
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(relayPin, OUTPUT);
+}
+
+void loop() {
+  int soilValue = analogRead(soilPin);
+
+  Serial.print("Soil Moisture Value: ");
+  Serial.println(soilValue);
+
+  if (soilValue > 2000) {
+    digitalWrite(relayPin, HIGH);
+    Serial.println("Soil is Dry - Pump ON");
+  } else {
+    digitalWrite(relayPin, LOW);
+    Serial.println("Soil is Wet - Pump OFF");
+  }
+
+  Serial.println("------------------------");
+
+  delay(2000);
+}
